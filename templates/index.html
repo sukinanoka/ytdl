@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="YouTube動画情報の確認と、権利のある動画ファイルのMP3・MP4変換ツール">
+  <title>Video Tools | 動画変換</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Video Tools ホーム">
+      <span class="brand-mark">V</span>
+      <span>Video Tools</span>
+    </a>
+    <span class="topbar-note">VIDEO / AUDIO CONVERTER</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">SIMPLE VIDEO WORKSPACE</div>
+      <h1>動画を、使いやすい形式に。</h1>
+      <p class="hero-copy">動画情報の確認と、動画・音声ファイルの変換ができます。</p>
+    </section>
+
+    <section class="panel" aria-labelledby="youtube-heading">
+      <div class="section-heading">
+        <div class="section-icon youtube-icon" aria-hidden="true">▶</div>
+        <div>
+          <h2 id="youtube-heading">YouTube URLを確認</h2>
+          <p>タイトル・投稿者・サムネイルを表示します。</p>
+        </div>
+      </div>
+      <form id="inspect-form" class="url-form">
+        <label for="youtube-url">YouTube動画URL</label>
+        <div class="input-row">
+          <input id="youtube-url" name="url" type="url" inputmode="url"
+                 placeholder="https://www.youtube.com/watch?v=..." required>
+          <button id="inspect-button" class="button button-primary" type="submit">URLを確認</button>
+        </div>
+      </form>
+      <p id="inspect-message" class="message" role="status" aria-live="polite"></p>
+      <div id="video-result" class="video-result hidden">
+        <img id="video-thumbnail" class="thumbnail" alt="動画のサムネイル">
+        <div class="video-details">
+          <h3 id="video-title"></h3>
+          <p id="video-author"></p>
+          <a id="watch-link" class="text-link" target="_blank" rel="noopener noreferrer">YouTubeで開く ↗</a>
+        </div>
+      </div>
+      <div id="creator-note" class="notice hidden">
+        <strong>自分が投稿した動画を保存する場合</strong>
+        <p>YouTube Studioの「コンテンツ」から動画のメニューを開き、<br class="desktop-only">「ダウンロード」を選んでください。</p>
+        <a class="button button-secondary" href="https://studio.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube Studioを開く ↗</a>
+        <p class="small-note">他人の動画をこのサイトで自動取得する機能はありません。</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="convert-heading">
+      <div class="section-heading">
+        <div class="section-icon convert-icon" aria-hidden="true">⇄</div>
+        <div>
+          <h2 id="convert-heading">動画・音声ファイルを変換</h2>
+          <p>自分が所有するか、変換の許可を得たファイルを選択。</p>
+        </div>
+      </div>
+      <form id="convert-form" class="convert-form">
+        <label for="media-file">変換するファイル</label>
+        <label class="file-picker" for="media-file">
+          <span class="upload-symbol" aria-hidden="true">↑</span>
+          <span id="file-label">クリックしてファイルを選択</span>
+          <small>MP4 / MOV / MKV / WEBM / MP3 / WAV など・最大250MB</small>
+        </label>
+        <input id="media-file" name="file" type="file"
+               accept=".mp4,.m4v,.mov,.mkv,.webm,.avi,.mp3,.wav,.m4a,.aac,.flac,.ogg" required>
+
+        <label for="output-format">出力形式</label>
+        <select id="output-format" name="format">
+          <option value="mp4">MP4（動画）</option>
+          <option value="mp3">MP3（音声のみ）</option>
+        </select>
+        <button id="convert-button" class="button button-success" type="submit">変換してダウンロード</button>
+      </form>
+      <div id="convert-message" class="message" role="status" aria-live="polite"></div>
+      <div class="progress-track hidden" id="progress-track"><span></span></div>
+    </section>
+
+    <section class="legal-note">
+      <h2>利用上の注意</h2>
+      <p>著作権者の許可がある動画・音声だけを扱ってください。</p>
+      <p>YouTube動画の取得は、YouTubeが認める方法を利用してください。</p>
+      <p>アップロードしたファイルは変換後にサーバー上から削除されます。</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>Video Tools</span>
+    <span>Personal use / Authorized files only</span>
+  </footer>
+</body>
+</html>
